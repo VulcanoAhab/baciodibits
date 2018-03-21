@@ -1,0 +1,12 @@
+#! /bin/bash
+
+BY=$1
+
+case "$1" in
+        "")
+                echo "Usage: $0 [--lsof ]"
+                ;;
+        --lsof)
+                lsof -i | awk '/(ESTABLISHED|LISTEN)/ {print $0}'
+                ;;          
+esac

@@ -1,0 +1,18 @@
+#! /bin/bash
+
+BY=$1
+
+case "$1" in
+        "")
+                echo "Usage (Linux only): $0 [--process | --network (netstat must be installed) | --log]"
+                ;;
+        --process)
+                ps auxwww | grep sshd:
+                ;;
+        --network)
+                sudo netstat -tnpa | grep "ESTABLISHED.*sshd"
+                ;;
+        --log)
+                sudo grep -E "sshd\[[1-9]+\]\: Accepted" /var/log/secure
+                ;;                
+esac
